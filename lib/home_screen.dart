@@ -56,3 +56,30 @@ extension IterationWithIndex<T> on Iterable<T> {
   ) =>
       Iterable.generate(length, (i) => f(i, length, elementAt(i)));
 }
+
+class NetworkImage extends StatelessWidget {
+  final int index;
+  final String url;
+  const NetworkImage({Key? key, required this.index, required this.url})
+      : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return Transform.rotate(
+      angle: -((index * 10.0).asDegreeToRadians()),
+      child: Transform.translate(
+        offset: Offset(-20.0 * index.toDouble(), 0.0),
+        child: ClipRRect(
+          borderRadius: BorderRadius.circular(10.0),
+          child: Image.network(
+            url,
+            alignment: Alignment.center,
+            width: double.infinity,
+            height: double.infinity,
+            fit: BoxFit.cover,
+          ),
+        ),
+      ),
+    );
+  }
+}
